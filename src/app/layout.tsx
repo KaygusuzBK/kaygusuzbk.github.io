@@ -5,12 +5,7 @@ import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import { ThemeProvider } from "@/components/providers/ThemeProvider";
 import { Toaster } from "react-hot-toast";
-import dynamic from "next/dynamic";
-
-const ParticleBackground = dynamic(
-  () => import("@/components/layout/ParticleBackground"),
-  { ssr: false }
-);
+import ClientOnlyParticles from "@/components/layout/ClientOnlyParticles";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -37,7 +32,7 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <Toaster position="top-center" />
-          <ParticleBackground />
+          <ClientOnlyParticles />
           <div className="relative z-10 flex flex-col min-h-screen">
             <Navbar />
             <main className="flex-grow pt-20">
