@@ -1,10 +1,10 @@
 import type { Metadata } from 'next';
 import { FaReact, FaVuejs, FaHtml5, FaJsSquare, FaCss3Alt } from 'react-icons/fa';
-import { SiTypescript, SiRedux, SiPinia, SiTailwindcss, SiWebpack } from 'react-icons/si';
+import { SiTypescript, SiRedux, SiTailwindcss, SiWebpack } from 'react-icons/si';
 
 export const metadata: Metadata = {
     title: 'Hakkımda | Berkan Kaygusuz',
-    description: 'Berkan Kaygusuz\'un profesyonel deneyimleri, eğitimi ve yetenekleri.',
+    description: 'Berkan Kaygusuz&apos;un profesyonel deneyimleri, eğitimi ve yetenekleri.',
 };
 
 const skills = [
@@ -13,7 +13,7 @@ const skills = [
     { name: 'TypeScript', icon: <SiTypescript size={40} className="text-blue-500" /> },
     { name: 'JavaScript', icon: <FaJsSquare size={40} className="text-yellow-400" /> },
     { name: 'Redux', icon: <SiRedux size={40} className="text-purple-500" /> },
-    { name: 'Pinia', icon: <SiPinia size={40} className="text-yellow-500" /> },
+    { name: 'Pinia', icon: <FaVuejs size={40} className="text-yellow-500" /> },
     { name: 'Tailwind CSS', icon: <SiTailwindcss size={40} className="text-cyan-500" /> },
     { name: 'HTML5', icon: <FaHtml5 size={40} className="text-orange-500" /> },
     { name: 'CSS3', icon: <FaCss3Alt size={40} className="text-blue-600" /> },

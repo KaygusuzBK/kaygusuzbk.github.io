@@ -2,13 +2,12 @@
 
 import { useEffect, useMemo, useState } from "react";
 import Particles, { initParticlesEngine } from "@tsparticles/react";
-import { type Container, type IOptions, type RecursivePartial } from "tsparticles-engine";
+import { type IOptions, type RecursivePartial } from "tsparticles-engine";
 import { loadSlim } from "@tsparticles/slim";
 import { useTheme } from "next-themes";
 
 const ParticleBackground = () => {
     const [init, setInit] = useState(false);
-    const { resolvedTheme } = useTheme();
 
     useEffect(() => {
         initParticlesEngine(async (engine) => {
