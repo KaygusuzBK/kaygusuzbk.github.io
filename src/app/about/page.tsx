@@ -4,7 +4,7 @@ import { SiTypescript, SiRedux, SiTailwindcss, SiWebpack } from 'react-icons/si'
 
 export const metadata: Metadata = {
     title: 'Hakkımda | Berkan Kaygusuz',
-    description: 'Berkan Kaygusuz&apos;un profesyonel deneyimleri, eğitimi ve yetenekleri.',
+    description: "Berkan Kaygusuz'un profesyonel deneyimleri, eğitimi ve yetenekleri.",
 };
 
 const skills = [
@@ -30,7 +30,7 @@ const AboutPage = () => {
             <div className="glass-card p-8 mb-12 text-center">
                 <h2 className="text-3xl font-bold mb-4 text-cyan-400">Ben Berkan Kaygusuz</h2>
                 <p className="text-gray-300 leading-relaxed max-w-3xl mx-auto">
-                    React.js (Redux, Redux Toolkit) ve Vue.js (Pinia) ile modern web uygulamaları geliştiriyorum. REST API entegrasyonu, performans optimizasyonu ve kullanıcı dostu arayüz tasarımında Tailwind CSS, Ant Design ve Shadcn gibi framework'leri kullanarak deneyim kazandım. JSON veri doğrulama, JWT tabanlı güvenlik ve dijital satış odası (sales room) projelerinde modüler ve responsive çözümler ürettim. State yönetimi, temiz kod prensipleri ve ekip içi iş birliği konularında yetkinim.
+                    {`React.js (Redux, Redux Toolkit) ve Vue.js (Pinia) ile modern web uygulamaları geliştiriyorum. REST API entegrasyonu, performans optimizasyonu ve kullanıcı dostu arayüz tasarımında Tailwind CSS, Ant Design ve Shadcn gibi framework'leri kullanarak deneyim kazandım. JSON veri doğrulama, JWT tabanlı güvenlik ve dijital satış odası (sales room) projelerinde modüler ve responsive çözümler ürettim. State yönetimi, temiz kod prensipleri ve ekip içi iş birliği konularında yetkinim.`}
                 </p>
             </div>
 

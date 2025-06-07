@@ -2,9 +2,8 @@
 
 import { useEffect, useMemo, useState } from "react";
 import Particles, { initParticlesEngine } from "@tsparticles/react";
-import { type IOptions, type RecursivePartial } from "tsparticles-engine";
+import { type IOptions } from "@tsparticles/engine";
 import { loadSlim } from "@tsparticles/slim";
-import { useTheme } from "next-themes";
 
 const ParticleBackground = () => {
     const [init, setInit] = useState(false);
@@ -17,7 +16,7 @@ const ParticleBackground = () => {
         });
     }, []);
 
-    const particlesOptions: RecursivePartial<IOptions> = useMemo(
+    const particlesOptions = useMemo(
         () => ({
             background: {
                 color: {
@@ -92,7 +91,7 @@ const ParticleBackground = () => {
         return (
             <Particles
                 id="tsparticles"
-                options={particlesOptions}
+                options={particlesOptions as unknown as IOptions}
                 className="fixed inset-0 -z-10"
             />
         );

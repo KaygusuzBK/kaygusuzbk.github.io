@@ -20,7 +20,7 @@ export async function POST(request: Request) {
       from: "Portfolio Contact Form <onboarding@resend.dev>",
       to: "berkankaygusuz@aof.anadolu.edu.tr",
       subject: "Portfolyo Sitenizden Yeni Mesaj",
-      reply_to: email,
+      replyTo: email,
       react: React.createElement(ContactFormEmail, {
         senderEmail: email,
         message: message,
