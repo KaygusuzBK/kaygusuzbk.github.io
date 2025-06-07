@@ -28,6 +28,8 @@ jobs:
         run: npm install
 
       - name: Build
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_PAT_FOR_PROJECTS }}
         run: npm run build
 
       - name: Upload artifact
