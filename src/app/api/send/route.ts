@@ -3,9 +3,9 @@ import { Resend } from "resend";
 import { ContactFormEmail } from "@/emails/ContactFormEmail";
 import React from "react";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
-
 export async function POST(request: Request) {
+  const resend = new Resend(process.env.RESEND_API_KEY);
+
   try {
     const { email, message } = await request.json();
 
