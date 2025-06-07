@@ -4,8 +4,13 @@ import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import { ThemeProvider } from "@/components/providers/ThemeProvider";
-import ParticleBackground from "@/components/layout/ParticleBackground";
 import { Toaster } from "react-hot-toast";
+import dynamic from "next/dynamic";
+
+const ParticleBackground = dynamic(
+  () => import("@/components/layout/ParticleBackground"),
+  { ssr: false }
+);
 
 const inter = Inter({ subsets: ["latin"] });
 
