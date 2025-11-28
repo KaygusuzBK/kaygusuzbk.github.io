@@ -328,7 +328,7 @@ export default function Home() {
           {/* Right content */}
           <main
             id="top"
-            className="space-y-12 sm:space-y-14 lg:space-y-16 pb-20 md:pb-0"
+            className="space-y-12 sm:space-y-14 lg:space-y-16 pb-28 md:pb-0"
           >
             {/* Hero / Overview */}
             <section>

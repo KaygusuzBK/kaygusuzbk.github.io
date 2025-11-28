@@ -16,7 +16,9 @@ export default function MobileDock() {
     const el = document.getElementById(targetId);
     if (!el) return;
     const rect = el.getBoundingClientRect();
-    const offset = window.scrollY + rect.top - 80; // a bit above the section
+    const isMobile = window.innerWidth < 768;
+    const offsetAmount = isMobile ? 56 : 80; // biraz yukarıda dursun; mobilde daha küçük offset
+    const offset = window.scrollY + rect.top - offsetAmount;
     window.scrollTo({ top: offset, behavior: "smooth" });
   }, []);
 
