@@ -48,10 +48,47 @@ export default function Home() {
     const fetchProjects = async () => {
       try {
         setLoadingProjects(true);
-        const res = await fetch("/api/github/repos");
-        const data = await res.json();
-        setProjects(data.projects?.slice(0, 4) ?? []);
+        // Direct GitHub API call for static export compatibility
+        const username = process.env.NEXT_PUBLIC_GITHUB_USERNAME || 'kaygusuzbk';
+        const token = process.env.NEXT_PUBLIC_GITHUB_TOKEN;
+        
+        const headers: HeadersInit = {
+          'Accept': 'application/vnd.github.v3+json',
+        };
+        
+        if (token) {
+          headers['Authorization'] = `token ${token}`;
+        }
+        
+        const res = await fetch(
+          `https://api.github.com/users/${username}/repos?sort=updated&per_page=10&type=all`,
+          { headers }
+        );
+        
+        if (!res.ok) {
+          throw new Error(`GitHub API error: ${res.status}`);
+        }
+        
+        const repos = await res.json();
+        const projects = repos
+          .filter((repo: any) => !repo.fork && repo.name !== username)
+          .map((repo: any) => ({
+            id: repo.id,
+            name: repo.name,
+            description: repo.description || '',
+            url: repo.html_url,
+            homepage: repo.homepage,
+            language: repo.language,
+            stars: repo.stargazers_count,
+            forks: repo.forks_count,
+            updatedAt: repo.updated_at,
+            topics: repo.topics || [],
+          }))
+          .slice(0, 4);
+        
+        setProjects(projects);
       } catch (e) {
+        console.error('Error fetching projects:', e);
         setProjects([]);
       } finally {
         setLoadingProjects(false);
@@ -394,7 +431,14 @@ export default function Home() {
             </section>
 
             {/* Selected work */}
-            <section id="work" className="space-y-4 sm:space-y-5">
+            <motion.section
+              id="work"
+              className="space-y-4 sm:space-y-5"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.6, ease: "easeOut" }}
+            >
               <div className="flex items-center justify-between gap-3">
                 <h3 className="font-serif text-xl sm:text-2xl md:text-3xl font-black">Selected work</h3>
                 <span
@@ -428,14 +472,56 @@ export default function Home() {
                   </p>
                 ) : (
                   <div className="grid gap-4 sm:gap-5 md:grid-cols-2">
-                    {projects.map((project) => (
-                      <Card
+                    {projects.map((project, index) => (
+                      <motion.div
                         key={project.id}
-                        className={cn(
-                          "group overflow-hidden relative",
-                          isDark ? "border-white/15 bg-black/90" : "border-black/10 bg-white",
-                        )}
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true, margin: "-50px" }}
+                        transition={{ duration: 0.5, delay: index * 0.1 }}
                       >
+                        <Card
+                          className={cn(
+                            "group overflow-hidden relative transition-all duration-300 hover:scale-[1.02]",
+                            isDark ? "border-white/15 bg-black/90" : "border-black/10 bg-white",
+                          )}
+                        >
+                          {/* Hover preview overlay */}
+                          <motion.div
+                            className="absolute inset-0 z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
+                            initial={false}
+                          >
+                            <div
+                              className={cn(
+                                "absolute inset-0 flex items-center justify-center",
+                                isDark ? "bg-black/95" : "bg-white/95",
+                              )}
+                            >
+                              <div className="text-center p-6 space-y-3">
+                                <Github className={cn("h-12 w-12 mx-auto", isDark ? "text-white/40" : "text-black/40")} />
+                                <p
+                                  className={cn(
+                                    "text-xs font-medium",
+                                    isDark ? "text-white/60" : "text-black/60",
+                                  )}
+                                >
+                                  {project.name}
+                                </p>
+                                <Link
+                                  href={`/projects/${encodeURIComponent(project.name.toLowerCase().replace(/\s+/g, "-"))}`}
+                                  className={cn(
+                                    "inline-flex items-center gap-1.5 text-xs font-semibold rounded-full px-4 py-2 transition-colors",
+                                    isDark
+                                      ? "bg-white text-black hover:bg-white/90"
+                                      : "bg-black text-white hover:bg-black/90",
+                                  )}
+                                >
+                                  View details
+                                  <ArrowUpRight className="h-3 w-3" />
+                                </Link>
+                              </div>
+                            </div>
+                          </motion.div>
                         <CardHeader className="p-4 sm:p-5 pb-3 sm:pb-3.5">
                           <div className="flex items-start justify-between gap-3">
                             <div className="min-w-0">
@@ -524,21 +610,34 @@ export default function Home() {
                           </div>
                         </CardContent>
                       </Card>
+                      </motion.div>
                     ))}
                   </div>
                 )}
               </div>
-            </section>
+            </motion.section>
 
             {/* About / Skills snapshot */}
-            <section id="about">
+            <motion.section
+              id="about"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.6, ease: "easeOut" }}
+            >
               <div className="grid gap-4 sm:gap-5 md:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)]">
-                <Card
-                  className={cn(
-                    "",
-                    isDark ? "border-white/15 bg-black/90" : "border-black/10 bg-white",
-                  )}
+                <motion.div
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: 0.1 }}
                 >
+                  <Card
+                    className={cn(
+                      "",
+                      isDark ? "border-white/15 bg-black/90" : "border-black/10 bg-white",
+                    )}
+                  >
                   <CardContent className="p-5 sm:p-6 md:p-7 space-y-3">
                     <p
                       className={cn(
@@ -569,12 +668,19 @@ export default function Home() {
                     </p>
                   </CardContent>
                 </Card>
-                <Card
-                  className={cn(
-                    "",
-                    isDark ? "border-white/15 bg-black/90" : "border-black/10 bg-white",
-                  )}
+                </motion.div>
+                <motion.div
+                  initial={{ opacity: 0, x: 20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: 0.2 }}
                 >
+                  <Card
+                    className={cn(
+                      "",
+                      isDark ? "border-white/15 bg-black/90" : "border-black/10 bg-white",
+                    )}
+                  >
                   <CardContent className="p-5 sm:p-6 md:p-7 space-y-3">
                     <p
                       className={cn(
@@ -597,11 +703,19 @@ export default function Home() {
                     </div>
                   </CardContent>
                 </Card>
+                </motion.div>
               </div>
-            </section>
+            </motion.section>
 
             {/* Contact */}
-            <section id="contact" className="pb-4 sm:pb-6">
+            <motion.section
+              id="contact"
+              className="pb-4 sm:pb-6"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.6, ease: "easeOut" }}
+            >
               <Card
                 className={cn(
                   "",
@@ -729,7 +843,7 @@ export default function Home() {
                   </form>
                 </CardContent>
               </Card>
-            </section>
+            </motion.section>
           </main>
         </div>
       </div>
