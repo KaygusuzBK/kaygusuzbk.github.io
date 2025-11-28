@@ -868,55 +868,12 @@ export default function Home() {
               transition={{ duration: 0.6, ease: "easeOut" }}
             >
               <div className="grid gap-4 sm:gap-5 md:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)]">
+                {/* Sağ kart içeriğini sola aldık */}
                 <motion.div
                   initial={{ opacity: 0, x: -20 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: 0.1 }}
-                >
-                  <Card
-                    className={cn(
-                      "",
-                      isDark ? "border-white/15 bg-black/90" : "border-black/10 bg-white",
-                    )}
-                  >
-                    <CardContent className="p-5 sm:p-6 md:p-7 space-y-3">
-                      <p
-                        className={cn(
-                          "text-[11px] uppercase tracking-[0.16em]",
-                          isDark ? "text-white/50" : "text-black/50",
-                        )}
-                      >
-                        Hakkımda
-                      </p>
-                      <p
-                        className={cn(
-                          "text-sm sm:text-base leading-relaxed",
-                          isDark ? "text-white/70" : "text-black/70",
-                        )}
-                      >
-                        Ben Berkan Kaygusuz. React.js (Redux, Redux Toolkit) ve Vue.js (Pinia) ile modern web
-                        uygulamaları geliştiriyorum. REST API entegrasyonu, performans optimizasyonu ve kullanıcı
-                        dostu arayüz tasarımında Tailwind CSS, Ant Design ve shadcn gibi araçlarla çalışıyorum.
-                      </p>
-                      <p
-                        className={cn(
-                          "text-sm sm:text-base leading-relaxed",
-                          isDark ? "text-white/70" : "text-black/70",
-                        )}
-                      >
-                        JSON veri doğrulama, JWT tabanlı güvenlik ve dijital satış odası (sales room) projelerinde
-                        modüler ve responsive çözümler ürettim. State yönetimi, temiz kod prensipleri ve ekip içi iş
-                        birliği konularında yetkinim.
-                      </p>
-                    </CardContent>
-                  </Card>
-                </motion.div>
-                <motion.div
-                  initial={{ opacity: 0, x: 20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: 0.2 }}
                 >
                   <Card
                     className={cn(
@@ -1004,6 +961,52 @@ export default function Home() {
                           </p>
                         </div>
                       </div>
+                    </CardContent>
+                  </Card>
+                </motion.div>
+
+                {/* Hakkımda kartını sağ tarafa aldık */}
+                <motion.div
+                  initial={{ opacity: 0, x: 20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: 0.2 }}
+                >
+                  <Card
+                    className={cn(
+                      "",
+                      isDark ? "border-white/15 bg-black/90" : "border-black/10 bg-white",
+                    )}
+                  >
+                    <CardContent className="p-5 sm:p-6 md:p-7 space-y-3">
+                      <p
+                        className={cn(
+                          "text-[11px] uppercase tracking-[0.16em]",
+                          isDark ? "text-white/50" : "text-black/50",
+                        )}
+                      >
+                        Hakkımda
+                      </p>
+                      <p
+                        className={cn(
+                          "text-sm sm:text-base leading-relaxed",
+                          isDark ? "text-white/70" : "text-black/70",
+                        )}
+                      >
+                        Ben Berkan Kaygusuz. React.js (Redux, Redux Toolkit) ve Vue.js (Pinia) ile modern web
+                        uygulamaları geliştiriyorum. REST API entegrasyonu, performans optimizasyonu ve kullanıcı
+                        dostu arayüz tasarımında Tailwind CSS, Ant Design ve shadcn gibi araçlarla çalışıyorum.
+                      </p>
+                      <p
+                        className={cn(
+                          "text-sm sm:text-base leading-relaxed",
+                          isDark ? "text-white/70" : "text-black/70",
+                        )}
+                      >
+                        JSON veri doğrulama, JWT tabanlı güvenlik ve dijital satış odası (sales room) projelerinde
+                        modüler ve responsive çözümler ürettim. State yönetimi, temiz kod prensipleri ve ekip içi iş
+                        birliği konularında yetkinim.
+                      </p>
                     </CardContent>
                   </Card>
                 </motion.div>
