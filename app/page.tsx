@@ -20,6 +20,7 @@ import { Button } from "./components/ui/button";
 import { Input } from "./components/ui/input";
 import { Textarea } from "./components/ui/textarea";
 import MobileDock from "./components/MobileDock";
+import { FrontendSkillTree, BackendSkillTree, ToolsSkillTree } from "./components/SkillTree";
 import { cn } from "../lib/utils";
 
 interface GitHubProject {
@@ -718,141 +719,41 @@ export default function Home() {
                     </div>
                   </div>
 
-                  <div className="grid gap-6 md:grid-cols-[minmax(0,1.1fr)_minmax(0,1.2fr)] items-center">
-                    {/* Animated beams side */}
-                    <div className="relative hidden md:block">
-                      <div className="relative mx-auto flex h-40 w-full max-w-md items-center justify-center">
-                        {/* Core node */}
-                        <motion.div
-                          className={cn(
-                            "relative flex h-20 w-20 items-center justify-center rounded-full border text-xs font-semibold",
-                            isDark
-                              ? "border-white/30 bg-black text-white"
-                              : "border-black/20 bg-white text-black",
-                          )}
-                          initial={{ scale: 0.8, opacity: 0 }}
-                          whileInView={{ scale: 1, opacity: 1 }}
-                          viewport={{ once: true }}
-                          transition={{ duration: 0.6 }}
-                        >
-                          <span className="text-center leading-tight">
-                            Frontend
-                            <br />
-                            Focused
-                          </span>
-                          {/* inner glow */}
-                          <motion.div
-                            className="pointer-events-none absolute inset-0 rounded-full"
-                            animate={{ boxShadow: ["0 0 0px rgba(255,255,255,0)", "0 0 35px rgba(255,255,255,0.25)", "0 0 0px rgba(255,255,255,0)"] }}
-                            transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-                          />
-                        </motion.div>
-
-                        {/* Beams */}
-                        <div className="pointer-events-none absolute inset-0">
-                          {["Frontend", "Backend & DB", "Tools"].map((label, index) => (
-                            <motion.div
-                              key={label}
-                              className={cn(
-                                "absolute h-[2px] rounded-full",
-                                isDark
-                                  ? "bg-gradient-to-r from-white/0 via-white/60 to-white/0"
-                                  : "bg-gradient-to-r from-black/0 via-black/60 to-black/0",
-                              )}
-                              style={{
-                                top: `${30 + index * 25}%`,
-                                left: "8%",
-                                right: "8%",
-                              }}
-                              initial={{ scaleX: 0, opacity: 0 }}
-                              whileInView={{ scaleX: 1, opacity: 1 }}
-                              viewport={{ once: true, margin: "-80px" }}
-                              transition={{ duration: 0.7, delay: 0.1 * index, ease: "easeOut" }}
-                            />
-                          ))}
-                        </div>
-                      </div>
+                  <div className="space-y-8">
+                    <div className="space-y-2">
+                      <p
+                        className={cn(
+                          "text-[11px] uppercase tracking-[0.16em]",
+                          isDark ? "text-white/50" : "text-black/50",
+                        )}
+                      >
+                        Frontend
+                      </p>
+                      <FrontendSkillTree />
                     </div>
 
-                    {/* Skills list side */}
-                    <div className="space-y-4 sm:space-y-5">
-                      <div className="space-y-2">
-                        <p
-                          className={cn(
-                            "text-[11px] uppercase tracking-[0.16em]",
-                            isDark ? "text-white/50" : "text-black/50",
-                          )}
-                        >
-                          Frontend
-                        </p>
-                        <div className="flex flex-wrap gap-1.5">
-                          {frontendStack.map((skill) => (
-                            <span
-                              key={skill}
-                              className={cn(
-                                "rounded-full px-3 py-1 text-[11px] border",
-                                isDark
-                                  ? "border-white/25 bg-white/5 text-white/80"
-                                  : "border-black/15 bg-black/5 text-black/80",
-                              )}
-                            >
-                              {skill}
-                            </span>
-                          ))}
-                        </div>
-                      </div>
+                    <div className="space-y-2">
+                      <p
+                        className={cn(
+                          "text-[11px] uppercase tracking-[0.16em]",
+                          isDark ? "text-white/50" : "text-black/50",
+                        )}
+                      >
+                        Backend &amp; Database
+                      </p>
+                      <BackendSkillTree />
+                    </div>
 
-                      <div className="space-y-2">
-                        <p
-                          className={cn(
-                            "text-[11px] uppercase tracking-[0.16em]",
-                            isDark ? "text-white/50" : "text-black/50",
-                          )}
-                        >
-                          Backend &amp; Database
-                        </p>
-                        <div className="flex flex-wrap gap-1.5">
-                          {backendStack.map((skill) => (
-                            <span
-                              key={skill}
-                              className={cn(
-                                "rounded-full px-3 py-1 text-[11px] border",
-                                isDark
-                                  ? "border-white/25 bg-white/5 text-white/80"
-                                  : "border-black/15 bg-black/5 text-black/80",
-                              )}
-                            >
-                              {skill}
-                            </span>
-                          ))}
-                        </div>
-                      </div>
-
-                      <div className="space-y-2">
-                        <p
-                          className={cn(
-                            "text-[11px] uppercase tracking-[0.16em]",
-                            isDark ? "text-white/50" : "text-black/50",
-                          )}
-                        >
-                          Tools, DevOps &amp; Others
-                        </p>
-                        <div className="flex flex-wrap gap-1.5">
-                          {toolsStack.map((skill) => (
-                            <span
-                              key={skill}
-                              className={cn(
-                                "rounded-full px-3 py-1 text-[11px] border",
-                                isDark
-                                  ? "border-white/25 bg-white/5 text-white/80"
-                                  : "border-black/15 bg-black/5 text-black/80",
-                              )}
-                            >
-                              {skill}
-                            </span>
-                          ))}
-                        </div>
-                      </div>
+                    <div className="space-y-2">
+                      <p
+                        className={cn(
+                          "text-[11px] uppercase tracking-[0.16em]",
+                          isDark ? "text-white/50" : "text-black/50",
+                        )}
+                      >
+                        Tools, DevOps &amp; Others
+                      </p>
+                      <ToolsSkillTree />
                     </div>
                   </div>
                 </CardContent>
