@@ -89,43 +89,71 @@ Circle.displayName = "Circle";
 export function FrontendSkillTree({ className }: { className?: string }) {
   const containerRef = useRef<HTMLDivElement>(null);
   const centerRef = useRef<HTMLDivElement>(null);
+  const l1 = useRef<HTMLDivElement>(null);
+  const l2 = useRef<HTMLDivElement>(null);
+  const l3 = useRef<HTMLDivElement>(null);
+  const l4 = useRef<HTMLDivElement>(null);
+  const l5 = useRef<HTMLDivElement>(null);
+  const l6 = useRef<HTMLDivElement>(null);
   const r1 = useRef<HTMLDivElement>(null);
   const r2 = useRef<HTMLDivElement>(null);
   const r3 = useRef<HTMLDivElement>(null);
   const r4 = useRef<HTMLDivElement>(null);
   const r5 = useRef<HTMLDivElement>(null);
+  const r6 = useRef<HTMLDivElement>(null);
 
   return (
     <div
       ref={containerRef}
       className={cn(
-        "relative flex h-56 w-full items-center justify-center overflow-hidden px-4 sm:px-6",
+        "relative flex h-72 w-full items-center justify-center overflow-hidden px-4 sm:px-6",
         className,
       )}
     >
-      <div className="flex size-full max-w-xl items-stretch justify-between gap-6">
-        {/* User node */}
+      <div className="flex size-full max-w-3xl items-center justify-between gap-8">
+        {/* Left skills */}
+        <div className="hidden sm:flex flex-col items-end justify-center gap-2">
+          <Circle ref={l1}>React.js</Circle>
+          <Circle ref={l2}>Vue.js</Circle>
+          <Circle ref={l3}>Next.js</Circle>
+          <Circle ref={l4}>TypeScript</Circle>
+          <Circle ref={l5}>JavaScript</Circle>
+          <Circle ref={l6}>React Native</Circle>
+        </div>
+
+        {/* User node in center */}
         <div className="flex flex-col justify-center">
-          <Circle ref={centerRef} className="size-14">
+          <Circle ref={centerRef} className="size-16 bg-black text-white dark:bg-white dark:text-black">
             <User className="h-6 w-6" />
           </Circle>
         </div>
-        {/* Tech nodes */}
+
+        {/* Right skills */}
         <div className="flex flex-col justify-center gap-2">
-          <Circle ref={r1}>React</Circle>
-          <Circle ref={r2}>Vue</Circle>
-          <Circle ref={r3}>Next.js</Circle>
-          <Circle ref={r4}>TypeScript</Circle>
-          <Circle ref={r5}>JavaScript</Circle>
+          <Circle ref={r1}>Redux</Circle>
+          <Circle ref={r2}>HTML5</Circle>
+          <Circle ref={r3}>CSS3</Circle>
+          <Circle ref={r4}>Tailwind CSS</Circle>
+          <Circle ref={r5}>Sass</Circle>
+          <Circle ref={r6}>Bootstrap</Circle>
         </div>
       </div>
 
-      {/* Beams */}
+      {/* Beams left side */}
+      <AnimatedBeam containerRef={containerRef} fromRef={centerRef} toRef={l1} />
+      <AnimatedBeam containerRef={containerRef} fromRef={centerRef} toRef={l2} />
+      <AnimatedBeam containerRef={containerRef} fromRef={centerRef} toRef={l3} />
+      <AnimatedBeam containerRef={containerRef} fromRef={centerRef} toRef={l4} />
+      <AnimatedBeam containerRef={containerRef} fromRef={centerRef} toRef={l5} />
+      <AnimatedBeam containerRef={containerRef} fromRef={centerRef} toRef={l6} />
+
+      {/* Beams right side */}
       <AnimatedBeam containerRef={containerRef} fromRef={centerRef} toRef={r1} />
       <AnimatedBeam containerRef={containerRef} fromRef={centerRef} toRef={r2} />
       <AnimatedBeam containerRef={containerRef} fromRef={centerRef} toRef={r3} />
       <AnimatedBeam containerRef={containerRef} fromRef={centerRef} toRef={r4} />
       <AnimatedBeam containerRef={containerRef} fromRef={centerRef} toRef={r5} />
+      <AnimatedBeam containerRef={containerRef} fromRef={centerRef} toRef={r6} />
     </div>
   );
 }
