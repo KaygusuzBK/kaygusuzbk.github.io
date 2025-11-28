@@ -8,10 +8,10 @@ interface AnimatedBeamProps {
   containerRef: React.RefObject<HTMLDivElement> | React.MutableRefObject<HTMLDivElement | null>;
   fromRef: React.RefObject<HTMLDivElement> | React.MutableRefObject<HTMLDivElement | null>;
   toRef: React.RefObject<HTMLDivElement> | React.MutableRefObject<HTMLDivElement | null>;
-  duration?: number;
+  curvature?: number;
 }
 
-const AnimatedBeam: React.FC<AnimatedBeamProps> = ({ containerRef, fromRef, toRef, duration = 3 }) => {
+const AnimatedBeam: React.FC<AnimatedBeamProps> = ({ containerRef, fromRef, toRef }) => {
   const [style, setStyle] = useState<React.CSSProperties | null>(null);
 
   useLayoutEffect(() => {
@@ -57,8 +57,14 @@ const AnimatedBeam: React.FC<AnimatedBeamProps> = ({ containerRef, fromRef, toRe
 
   return (
     <div
-      className="pointer-events-none absolute h-[2px] origin-left bg-gradient-to-r from-transparent via-black/40 to-transparent dark:via-white/50 animate-pulse"
-      style={style}
+      className="pointer-events-none absolute origin-left rounded-full"
+      style={{
+        ...style,
+        height: 4,
+        background: "linear-gradient(90deg,#ffaa40,#9c40ff)",
+        boxShadow: "0 0 18px rgba(156,64,255,0.75)",
+        opacity: 0.9,
+      }}
     />
   );
 };
