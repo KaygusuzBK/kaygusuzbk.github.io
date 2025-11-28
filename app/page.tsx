@@ -1026,7 +1026,7 @@ export default function Home() {
                 )}
               >
                 <CardContent className="p-5 sm:p-6 md:p-7 space-y-4 sm:space-y-5">
-                  <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-3">
+                  <div className="flex flex-col gap-4 sm:gap-3">
                     <div>
                       <p
                         className={cn(
@@ -1037,7 +1037,7 @@ export default function Home() {
                         Contact
                       </p>
                       <h3 className="mt-1 font-serif text-xl sm:text-2xl font-black">
-                        Have a project or role in mind?
+                        Benimle iletişime geç.
                       </h3>
                       <p
                         className={cn(
@@ -1045,25 +1045,69 @@ export default function Home() {
                           isDark ? "text-white/60" : "text-black/60",
                         )}
                       >
-                        Send a short brief and I&apos;ll get back with thoughts, not templates.
+                        LinkedIn, WhatsApp veya e-posta üzerinden ulaşabilirsin. Kısa bir mesaj bırakman yeterli.
           </p>
         </div>
-                    <Button
-                      asChild
-                      size="sm"
-                      variant="outline"
-                      className={cn(
-                        "rounded-full px-4 h-8 border",
-                        isDark
-                          ? "border-white text-white hover:bg-white hover:text-black"
-                          : "border-black text-black hover:bg-black hover:text-white",
-                      )}
-                    >
-                      <Link href="mailto:mail@kaygusuzbk.dev">
-                        <Mail className="mr-1.5 h-3.5 w-3.5" />
-                        mail@kaygusuzbk.dev
-                      </Link>
-                    </Button>
+
+                    <div className="flex flex-wrap items-center gap-2.5 sm:gap-3">
+                      <Button
+                        asChild
+                        size="sm"
+                        variant="outline"
+                        className={cn(
+                          "rounded-full px-4 h-8 border text-xs sm:text-sm",
+                          isDark
+                            ? "border-white text-white hover:bg-white hover:text-black"
+                            : "border-black text-black hover:bg-black hover:text-white",
+                        )}
+                      >
+                        <Link
+                          href="https://www.linkedin.com/in/kaygusuzbk"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+                          <span className="mr-1.5 text-[13px] font-semibold">in</span>
+                          LinkedIn
+                        </Link>
+                      </Button>
+
+                      <Button
+                        asChild
+                        size="sm"
+                        variant="outline"
+                        className={cn(
+                          "rounded-full px-4 h-8 border text-xs sm:text-sm",
+                          isDark
+                            ? "border-white text-white hover:bg-white hover:text-black"
+                            : "border-black text-black hover:bg-black hover:text-white",
+                        )}
+                      >
+                        <Link
+                          href="https://wa.me/905000000000"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+                          WhatsApp
+                        </Link>
+                      </Button>
+
+                      <Button
+                        asChild
+                        size="sm"
+                        variant="outline"
+                        className={cn(
+                          "rounded-full px-4 h-8 border text-xs sm:text-sm",
+                          isDark
+                            ? "border-white text-white hover:bg-white hover:text-black"
+                            : "border-black text-black hover:bg-black hover:text-white",
+                        )}
+                      >
+                        <Link href="mailto:mail@kaygusuzbk.dev">
+                          <Mail className="mr-1.5 h-3.5 w-3.5" />
+                          mail@kaygusuzbk.dev
+                        </Link>
+                      </Button>
+                    </div>
                   </div>
 
                   <form
