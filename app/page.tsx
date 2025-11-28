@@ -37,6 +37,42 @@ interface GitHubProject {
 
 type Theme = "light" | "dark";
 
+const frontendStack = [
+  "React.js",
+  "Vue.js",
+  "Next.js",
+  "TypeScript",
+  "JavaScript",
+  "React Native",
+  "Redux",
+  "HTML5",
+  "CSS3",
+  "Tailwind CSS",
+  "Sass",
+  "Bootstrap",
+];
+
+const backendStack = [
+  "Node.js",
+  "Python",
+  "MongoDB",
+  "Firebase",
+  "GraphQL",
+  "C",
+  "C#",
+];
+
+const toolsStack = [
+  "Git",
+  "Docker",
+  "AWS",
+  "Linux",
+  "Figma",
+  "Postman",
+  "Cypress",
+  "RabbitMQ",
+];
+
 export default function Home() {
   const [projects, setProjects] = useState<GitHubProject[]>([]);
   const [loadingProjects, setLoadingProjects] = useState(true);
@@ -234,23 +270,35 @@ export default function Home() {
 
             <div className="mt-6 space-y-3 text-xs sm:text-sm">
               <div className="flex gap-2">
-                <Button asChild size="sm" className="rounded-full px-4 py-2 h-8 bg-black text-white hover:bg-black/90">
-                  <Link href="/BerkanKaygusuz.pdf" target="_blank" rel="noopener noreferrer">
-                    <FileText className="mr-1.5 h-3.5 w-3.5" />
-                    CV
-                  </Link>
-                </Button>
-                <Button
-                  asChild
-                  size="sm"
-                  variant="outline"
-                  className="rounded-full px-4 py-2 h-8 border-black text-black hover:bg-black hover:text-white"
-                >
-                  <Link href="#contact">
-                    <Mail className="mr-1.5 h-3.5 w-3.5" />
-                    Contact
-                  </Link>
-                </Button>
+                  <Button
+                    asChild
+                    size="sm"
+                    className={cn(
+                      "rounded-full px-4 py-2 h-8",
+                      "bg-black text-white hover:bg-black/90",
+                    )}
+                  >
+                    <Link href="/BerkanKaygusuz.pdf" target="_blank" rel="noopener noreferrer">
+                      <FileText className="mr-1.5 h-3.5 w-3.5" />
+                      CV
+                    </Link>
+                  </Button>
+                  <Button
+                    asChild
+                    size="sm"
+                    variant="outline"
+                    className={cn(
+                      "rounded-full px-4 py-2 h-8 border",
+                      isDark
+                        ? "border-white text-white hover:bg-white hover:text-black"
+                        : "border-black text-black hover:bg-black hover:text-white",
+                    )}
+                  >
+                    <Link href="#contact">
+                      <Mail className="mr-1.5 h-3.5 w-3.5" />
+                      Contact
+                    </Link>
+                  </Button>
               </div>
               <div
                 className={cn(
@@ -555,8 +603,20 @@ export default function Home() {
                         >
                           <div className="flex flex-wrap items-center gap-3">
                             {project.language && (
-                              <span className="inline-flex items-center gap-1 rounded-full border border-black/15 px-2.5 py-1">
-                                <span className="h-1.5 w-1.5 rounded-full bg-black" />
+                              <span
+                                className={cn(
+                                  "inline-flex items-center gap-1 rounded-full border px-2.5 py-1 text-[11px]",
+                                  isDark
+                                    ? "border-white/30 bg-white/5 text-white/80"
+                                    : "border-black/15 bg-black/5 text-black/80",
+                                )}
+                              >
+                                <span
+                                  className={cn(
+                                    "h-1.5 w-1.5 rounded-full",
+                                    isDark ? "bg-white" : "bg-black",
+                                  )}
+                                />
                                 <span>{project.language}</span>
                               </span>
                             )}
@@ -587,7 +647,12 @@ export default function Home() {
                                 asChild
                                 size="sm"
                                 variant="outline"
-                                className="h-8 rounded-full border-black text-black hover:bg-black hover:text-white px-3"
+                                className={cn(
+                                  "h-8 rounded-full border px-3",
+                                  isDark
+                                    ? "border-white text-white hover:bg-white hover:text-black"
+                                    : "border-black text-black hover:bg-black hover:text-white",
+                                )}
                               >
                                 <Link href={project.url} target="_blank" rel="noopener noreferrer">
                                   Repo
@@ -617,6 +682,178 @@ export default function Home() {
               </div>
             </motion.section>
 
+            {/* My Tech Stack / Skill Tree */}
+            <motion.section
+              id="stack"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-120px" }}
+              transition={{ duration: 0.6, ease: "easeOut" }}
+            >
+              <Card
+                className={cn(
+                  "overflow-hidden",
+                  isDark ? "border-white/15 bg-black/90" : "border-black/10 bg-white",
+                )}
+              >
+                <CardContent className="p-5 sm:p-6 md:p-8 space-y-6 sm:space-y-7">
+                  <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-3">
+                    <div className="space-y-1.5">
+                      <p
+                        className={cn(
+                          "text-[11px] uppercase tracking-[0.16em]",
+                          isDark ? "text-white/50" : "text-black/50",
+                        )}
+                      >
+                        My Tech Stack
+                      </p>
+                      <h3 className="font-serif text-xl sm:text-2xl md:text-3xl font-black">
+                        Skill tree of my daily tools.
+                      </h3>
+                    </div>
+                  </div>
+
+                  <div className="grid gap-6 md:grid-cols-[minmax(0,1.1fr)_minmax(0,1.2fr)] items-center">
+                    {/* Animated beams side */}
+                    <div className="relative hidden md:block">
+                      <div className="relative mx-auto flex h-40 w-full max-w-md items-center justify-center">
+                        {/* Core node */}
+                        <motion.div
+                          className={cn(
+                            "relative flex h-20 w-20 items-center justify-center rounded-full border text-xs font-semibold",
+                            isDark
+                              ? "border-white/30 bg-black text-white"
+                              : "border-black/20 bg-white text-black",
+                          )}
+                          initial={{ scale: 0.8, opacity: 0 }}
+                          whileInView={{ scale: 1, opacity: 1 }}
+                          viewport={{ once: true }}
+                          transition={{ duration: 0.6 }}
+                        >
+                          <span className="text-center leading-tight">
+                            Frontend
+                            <br />
+                            Focused
+                          </span>
+                          {/* inner glow */}
+                          <motion.div
+                            className="pointer-events-none absolute inset-0 rounded-full"
+                            animate={{ boxShadow: ["0 0 0px rgba(255,255,255,0)", "0 0 35px rgba(255,255,255,0.25)", "0 0 0px rgba(255,255,255,0)"] }}
+                            transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+                          />
+                        </motion.div>
+
+                        {/* Beams */}
+                        <div className="pointer-events-none absolute inset-0">
+                          {["Frontend", "Backend & DB", "Tools"].map((label, index) => (
+                            <motion.div
+                              key={label}
+                              className={cn(
+                                "absolute h-[2px] rounded-full",
+                                isDark
+                                  ? "bg-gradient-to-r from-white/0 via-white/60 to-white/0"
+                                  : "bg-gradient-to-r from-black/0 via-black/60 to-black/0",
+                              )}
+                              style={{
+                                top: `${30 + index * 25}%`,
+                                left: "8%",
+                                right: "8%",
+                              }}
+                              initial={{ scaleX: 0, opacity: 0 }}
+                              whileInView={{ scaleX: 1, opacity: 1 }}
+                              viewport={{ once: true, margin: "-80px" }}
+                              transition={{ duration: 0.7, delay: 0.1 * index, ease: "easeOut" }}
+                            />
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Skills list side */}
+                    <div className="space-y-4 sm:space-y-5">
+                      <div className="space-y-2">
+                        <p
+                          className={cn(
+                            "text-[11px] uppercase tracking-[0.16em]",
+                            isDark ? "text-white/50" : "text-black/50",
+                          )}
+                        >
+                          Frontend
+                        </p>
+                        <div className="flex flex-wrap gap-1.5">
+                          {frontendStack.map((skill) => (
+                            <span
+                              key={skill}
+                              className={cn(
+                                "rounded-full px-3 py-1 text-[11px] border",
+                                isDark
+                                  ? "border-white/25 bg-white/5 text-white/80"
+                                  : "border-black/15 bg-black/5 text-black/80",
+                              )}
+                            >
+                              {skill}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+
+                      <div className="space-y-2">
+                        <p
+                          className={cn(
+                            "text-[11px] uppercase tracking-[0.16em]",
+                            isDark ? "text-white/50" : "text-black/50",
+                          )}
+                        >
+                          Backend &amp; Database
+                        </p>
+                        <div className="flex flex-wrap gap-1.5">
+                          {backendStack.map((skill) => (
+                            <span
+                              key={skill}
+                              className={cn(
+                                "rounded-full px-3 py-1 text-[11px] border",
+                                isDark
+                                  ? "border-white/25 bg-white/5 text-white/80"
+                                  : "border-black/15 bg-black/5 text-black/80",
+                              )}
+                            >
+                              {skill}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+
+                      <div className="space-y-2">
+                        <p
+                          className={cn(
+                            "text-[11px] uppercase tracking-[0.16em]",
+                            isDark ? "text-white/50" : "text-black/50",
+                          )}
+                        >
+                          Tools, DevOps &amp; Others
+                        </p>
+                        <div className="flex flex-wrap gap-1.5">
+                          {toolsStack.map((skill) => (
+                            <span
+                              key={skill}
+                              className={cn(
+                                "rounded-full px-3 py-1 text-[11px] border",
+                                isDark
+                                  ? "border-white/25 bg-white/5 text-white/80"
+                                  : "border-black/15 bg-black/5 text-black/80",
+                              )}
+                            >
+                              {skill}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </motion.section>
+
             {/* About / Skills snapshot */}
             <motion.section
               id="about"
@@ -638,36 +875,37 @@ export default function Home() {
                       isDark ? "border-white/15 bg-black/90" : "border-black/10 bg-white",
                     )}
                   >
-                  <CardContent className="p-5 sm:p-6 md:p-7 space-y-3">
-                    <p
-                      className={cn(
-                        "text-[11px] uppercase tracking-[0.16em]",
-                        isDark ? "text-white/50" : "text-black/50",
-                      )}
-                    >
-                      About
-                    </p>
-                    <p
-                      className={cn(
-                        "text-sm sm:text-base leading-relaxed",
-                        isDark ? "text-white/70" : "text-black/70",
-                      )}
-                    >
-                      I&apos;m a frontend developer focused on building clear, quiet interfaces — the type of
-                      products you don&apos;t have to explain twice. I prefer simple structures, thoughtful motion,
-                      and small details that make tools feel trusted.
-                    </p>
-                    <p
-                      className={cn(
-                        "text-sm sm:text-base leading-relaxed",
-                        isDark ? "text-white/70" : "text-black/70",
-                      )}
-                    >
-                      I enjoy collaborating with designers and product teams, turning rough ideas into working
-                      experiences with solid engineering underneath.
-                    </p>
-                  </CardContent>
-                </Card>
+                    <CardContent className="p-5 sm:p-6 md:p-7 space-y-3">
+                      <p
+                        className={cn(
+                          "text-[11px] uppercase tracking-[0.16em]",
+                          isDark ? "text-white/50" : "text-black/50",
+                        )}
+                      >
+                        Hakkımda
+                      </p>
+                      <p
+                        className={cn(
+                          "text-sm sm:text-base leading-relaxed",
+                          isDark ? "text-white/70" : "text-black/70",
+                        )}
+                      >
+                        Ben Berkan Kaygusuz. React.js (Redux, Redux Toolkit) ve Vue.js (Pinia) ile modern web
+                        uygulamaları geliştiriyorum. REST API entegrasyonu, performans optimizasyonu ve kullanıcı
+                        dostu arayüz tasarımında Tailwind CSS, Ant Design ve shadcn gibi araçlarla çalışıyorum.
+                      </p>
+                      <p
+                        className={cn(
+                          "text-sm sm:text-base leading-relaxed",
+                          isDark ? "text-white/70" : "text-black/70",
+                        )}
+                      >
+                        JSON veri doğrulama, JWT tabanlı güvenlik ve dijital satış odası (sales room) projelerinde
+                        modüler ve responsive çözümler ürettim. State yönetimi, temiz kod prensipleri ve ekip içi iş
+                        birliği konularında yetkinim.
+                      </p>
+                    </CardContent>
+                  </Card>
                 </motion.div>
                 <motion.div
                   initial={{ opacity: 0, x: 20 }}
@@ -681,28 +919,88 @@ export default function Home() {
                       isDark ? "border-white/15 bg-black/90" : "border-black/10 bg-white",
                     )}
                   >
-                  <CardContent className="p-5 sm:p-6 md:p-7 space-y-3">
-                    <p
-                      className={cn(
-                        "text-[11px] uppercase tracking-[0.16em]",
-                        isDark ? "text-white/50" : "text-black/50",
-                      )}
-                    >
-                      Capabilities
-                    </p>
-                    <div
-                      className={cn(
-                        "space-y-1.5 text-xs sm:text-sm",
-                        isDark ? "text-white/70" : "text-black/70",
-                      )}
-                    >
-                      <p>• Interface design & micro-interactions</p>
-                      <p>• Design systems & component libraries</p>
-                      <p>• Frontend architecture with React / Next.js</p>
-                      <p>• Clean APIs and simple data flows</p>
-                    </div>
-                  </CardContent>
-                </Card>
+                    <CardContent className="p-5 sm:p-6 md:p-7 space-y-4">
+                      <div className="space-y-2">
+                        <p
+                          className={cn(
+                            "text-[11px] uppercase tracking-[0.16em]",
+                            isDark ? "text-white/50" : "text-black/50",
+                          )}
+                        >
+                          Teknolojiler &amp; Yetenekler
+                        </p>
+                        <div
+                          className={cn(
+                            "space-y-1.5 text-xs sm:text-sm",
+                            isDark ? "text-white/70" : "text-black/70",
+                          )}
+                        >
+                          <p>• React.js, Redux, Redux Toolkit</p>
+                          <p>• Vue.js, Pinia</p>
+                          <p>• TypeScript, JavaScript</p>
+                          <p>• Tailwind CSS, Ant Design, shadcn</p>
+                          <p>• HTML5, CSS3, Webpack</p>
+                        </div>
+                      </div>
+
+                      <div className="space-y-2">
+                        <p
+                          className={cn(
+                            "text-[11px] uppercase tracking-[0.16em]",
+                            isDark ? "text-white/50" : "text-black/50",
+                          )}
+                        >
+                          Deneyimlerim
+                        </p>
+                        <div
+                          className={cn(
+                            "space-y-1.5 text-xs sm:text-sm",
+                            isDark ? "text-white/70" : "text-black/70",
+                          )}
+                        >
+                          <p className="font-semibold">
+                            Front-End Developer — Deal Forward (Remote, İngiltere) · 04/2024 – 12/2024
+                          </p>
+                          <p>• Vue.js ile dijital satış odası (sales room) ve kullanıcı arayüzleri geliştirdim.</p>
+                          <p>• Pinia ile modüler state yönetimi ve yeniden kullanılabilir bileşenler tasarladım.</p>
+                          <p>• REST API entegrasyonları ve JWT tabanlı güvenlik çözümleri üzerinde çalıştım.</p>
+                          <p className="mt-2 font-semibold">
+                            Front-End Developer — Appac Software (Gebze, Türkiye) · 01/2025 – 02/2025
+                          </p>
+                          <p>• React ve TypeScript ile entegre ERP ve B2B satış uygulamaları geliştirdim.</p>
+                          <p>• Redux Toolkit ile veri yönetimini optimize ettim.</p>
+                          <p>• Webpack ve lazy loading kullanarak performansı iyileştirdim.</p>
+                        </div>
+                      </div>
+
+                      <div className="space-y-2">
+                        <p
+                          className={cn(
+                            "text-[11px] uppercase tracking-[0.16em]",
+                            isDark ? "text-white/50" : "text-black/50",
+                          )}
+                        >
+                          Eğitim
+                        </p>
+                        <div
+                          className={cn(
+                            "space-y-1.5 text-xs sm:text-sm",
+                            isDark ? "text-white/70" : "text-black/70",
+                          )}
+                        >
+                          <p className="font-semibold">
+                            Yönetim Bilişim Sistemleri — Anadolu Üniversitesi · 10/2022 – Devam Ediyor
+                          </p>
+                          <p className="font-semibold">
+                            Junior Developer — 42 Ecole · 07/2022 – 10/2023
+                          </p>
+                          <p className="font-semibold">
+                            Bilgisayar Programcılığı — Çanakkale Onsekiz Mart Üniversitesi · 10/2020 – 07/2022
+                          </p>
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
                 </motion.div>
               </div>
             </motion.section>
@@ -749,7 +1047,12 @@ export default function Home() {
                       asChild
                       size="sm"
                       variant="outline"
-                      className="rounded-full border-black text-black hover:bg-black hover:text-white px-4 h-8"
+                      className={cn(
+                        "rounded-full px-4 h-8 border",
+                        isDark
+                          ? "border-white text-white hover:bg-white hover:text-black"
+                          : "border-black text-black hover:bg-black hover:text-white",
+                      )}
                     >
                       <Link href="mailto:mail@kaygusuzbk.dev">
                         <Mail className="mr-1.5 h-3.5 w-3.5" />
