@@ -168,7 +168,9 @@ export default function Home() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, ease: "easeOut" }}
             className={cn(
-              "flex flex-col justify-between rounded-3xl p-5 sm:p-6 lg:p-7 sticky top-4 h-fit lg:h-[calc(100vh-3rem)] border",
+              "flex flex-col justify-between rounded-3xl p-5 sm:p-6 lg:p-7 border",
+              // Sticky only on md+ to avoid mobile overlap while scrolling
+              "md:sticky md:top-4 md:h-[calc(100vh-3rem)]",
               isDark ? "border-white/15 bg-black/90" : "border-black/10 bg-white",
             )}
           >
@@ -324,7 +326,10 @@ export default function Home() {
           </motion.aside>
 
           {/* Right content */}
-          <main className="space-y-12 sm:space-y-14 lg:space-y-16" id="top">
+          <main
+            id="top"
+            className="space-y-12 sm:space-y-14 lg:space-y-16 pb-20 md:pb-0"
+          >
             {/* Hero / Overview */}
             <section>
               <div className="grid gap-4 sm:gap-5 md:grid-cols-[1.4fr_minmax(0,1fr)]">
