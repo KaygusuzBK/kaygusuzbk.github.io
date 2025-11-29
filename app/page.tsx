@@ -21,6 +21,7 @@ import { Input } from "./components/ui/input";
 import { Textarea } from "./components/ui/textarea";
 import MobileDock from "./components/MobileDock";
 import { FrontendSkillTree, BackendSkillTree, ToolsSkillTree } from "./components/SkillTree";
+import { FrontendIconCloud, BackendIconCloud, ToolsIconCloud } from "./components/IconCloudDemo";
 import { cn } from "../lib/utils";
 
 interface GitHubProject {
@@ -487,7 +488,7 @@ export default function Home() {
             {/* Selected work */}
             <motion.section
               id="work"
-              className="space-y-4 sm:space-y-5"
+              className="space-y-4 sm:space-y-5 scroll-mt-24 md:scroll-mt-32"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-100px" }}
@@ -691,6 +692,7 @@ export default function Home() {
             {/* My Tech Stack / Skill Tree */}
             <motion.section
               id="stack"
+              className="scroll-mt-24 md:scroll-mt-32"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-120px" }}
@@ -719,7 +721,8 @@ export default function Home() {
                     </div>
                   </div>
 
-                  <div className="space-y-8">
+                  {/* Desktop / tablet: skill trees with animated beams */}
+                  <div className="hidden md:block space-y-8">
                     <div className="space-y-2">
                       <p
                         className={cn(
@@ -756,6 +759,45 @@ export default function Home() {
                       <ToolsSkillTree />
                     </div>
                   </div>
+
+                  {/* Mobile: Her bölüm için ayrı IconCloud */}
+                  <div className="md:hidden space-y-8">
+                    <div className="space-y-2">
+                      <p
+                        className={cn(
+                          "text-[11px] uppercase tracking-[0.16em]",
+                          isDark ? "text-white/50" : "text-black/50",
+                        )}
+                      >
+                        Frontend
+                      </p>
+                      <FrontendIconCloud />
+                    </div>
+
+                    <div className="space-y-2">
+                      <p
+                        className={cn(
+                          "text-[11px] uppercase tracking-[0.16em]",
+                          isDark ? "text-white/50" : "text-black/50",
+                        )}
+                      >
+                        Backend &amp; Database
+                      </p>
+                      <BackendIconCloud />
+                    </div>
+
+                    <div className="space-y-2">
+                      <p
+                        className={cn(
+                          "text-[11px] uppercase tracking-[0.16em]",
+                          isDark ? "text-white/50" : "text-black/50",
+                        )}
+                      >
+                        Tools, DevOps &amp; Others
+                      </p>
+                      <ToolsIconCloud />
+                    </div>
+                  </div>
                 </CardContent>
               </Card>
             </motion.section>
@@ -763,6 +805,7 @@ export default function Home() {
             {/* About / Skills snapshot */}
             <motion.section
               id="about"
+              className="scroll-mt-24 md:scroll-mt-32"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-100px" }}
@@ -917,7 +960,7 @@ export default function Home() {
             {/* Contact */}
             <motion.section
               id="contact"
-              className="pb-4 sm:pb-6"
+              className="scroll-mt-24 md:scroll-mt-32 pb-4 sm:pb-6"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-100px" }}
@@ -957,13 +1000,7 @@ export default function Home() {
                       <Button
                         asChild
                         size="sm"
-                        variant="outline"
-                        className={cn(
-                          "rounded-full px-4 h-8 border text-xs sm:text-sm",
-                          isDark
-                            ? "border-white text-white hover:bg-white hover:text-black"
-                            : "border-black text-black hover:bg-black hover:text-white",
-                        )}
+                        className="rounded-full px-4 h-8 bg-black text-white hover:bg-black/90 text-xs sm:text-sm"
                       >
                         <Link
                           href="https://www.linkedin.com/in/kaygusuzbk"
@@ -978,13 +1015,7 @@ export default function Home() {
                       <Button
                         asChild
                         size="sm"
-                        variant="outline"
-                        className={cn(
-                          "rounded-full px-4 h-8 border text-xs sm:text-sm",
-                          isDark
-                            ? "border-white text-white hover:bg-white hover:text-black"
-                            : "border-black text-black hover:bg-black hover:text-white",
-                        )}
+                        className="rounded-full px-4 h-8 bg-black text-white hover:bg-black/90 text-xs sm:text-sm"
                       >
                         <Link
                           href="https://wa.me/905000000000"
@@ -998,13 +1029,7 @@ export default function Home() {
                       <Button
                         asChild
                         size="sm"
-                        variant="outline"
-                        className={cn(
-                          "rounded-full px-4 h-8 border text-xs sm:text-sm",
-                          isDark
-                            ? "border-white text-white hover:bg-white hover:text-black"
-                            : "border-black text-black hover:bg-black hover:text-white",
-                        )}
+                        className="rounded-full px-4 h-8 bg-black text-white hover:bg-black/90 text-xs sm:text-sm"
                       >
                         <Link href="mailto:mail@kaygusuzbk.dev">
                           <Mail className="mr-1.5 h-3.5 w-3.5" />
